@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+      <h1>Registration on the site </h1>
+      {{ form_start(form)}}
+      {{ form_row(form.username, {'label': 'First name ' ,'attr':{'placeholder':'Enter your first name'}}) }}
+      <br>
+      {{ form_row(form.lastname, {'label': 'Last name ' ,'attr':{'placeholder':'Enter your last name'}}) }}
+      <br>
+      {{ form_row(form.email, {'label': 'Address Email ' ,'attr':{'placeholder':'Enter your address Email'}}) }}
+      <br>
+      {{ form_row(form.password , {'label': 'Password ' ,'attr':{'placeholder':'Enter your password '}}) }}
+      <br>
+      {{ form_row(form.confirm_password , {'label': 'Password confirmation ' ,'attr':{'placeholder':'Confirm
+      '
+      }})}}
+      <br>
+      {{ form_row(form.roles ) }}
+      <br>
+      
+
+      <button type="submit" class="btn btn-success">Registration</button>
+      
+</center>
+{{ form_end(form)}}
+<br>
+<center>
+<a href="{{path('security_login')}}"><button>Log in </button></a>
+</center>
+</center>
+<center>
+<h1>list of users</h1>
+<center>
+<table width="50%" border="1" cellspacing="1" cellpadding="5">
+    <tr>
+        <th><center>Username</center></th>
+        <th><center>Lastname</center></th>
+        <th><center>Email</center></th>
+        <th><center>Ask for vacation</center></th>
+        
+    </tr>
+    {% for key in users %}
+    <tr>
+       <td><center>{{ key.username|e }}</center></td>
+       <td><center>{{ key.lastname|e }}</center></td>
+       <td><center>{{ key.email|e }}</center></td>
+       <td><center><button class="button">Check </button></center></td>
+       
+       
+   </tr>
+   {% endfor %}
+</table>
+</center>
+
+{% endblock %}

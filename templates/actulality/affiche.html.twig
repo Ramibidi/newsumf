@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+    <h2 style="color:red;">Actulality</h2>
+<table width="50%" border="1" cellspacing="1" cellpadding="5">
+    <tr>
+        <th><center>Article</center></th>
+        <th><center>Text</center></th>
+        
+    </tr>
+    {% for key in categ %}
+    <tr>
+       <td><center>{{ key.article|e }}</center></td>
+       <td><center>{{ key.text|e }}</center></td>
+        
+   </tr>
+   {% endfor %}
+</table>
+</center>
+
+{% endblock %}

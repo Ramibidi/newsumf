@@ -1,0 +1,128 @@
+{% extends "base.html.twig" %}
+{% block title %}Conge{% endblock %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<div class="container">
+<h1 class="create">Veuillez remplir le formulaire de congé </h1>
+{{ form_start(form2) }}
+<div id="userId">
+{{ form_row(form2.iduser,{value:users.id}) }}
+</div>
+<div class="content">
+{{ form_row(form2.startdate) }}
+</div>
+<div class="content">
+{{ form_row(form2.numberdays) }}
+</div>
+<div id="vka">
+{{ form_row(form2.status) }}
+</div>
+<div class="content">
+<button type="submit" name="submit_button" id="submit_button">Ajouter</button>
+</div>
+{{ form_end(form2) }}
+
+</center>
+
+
+
+<center>
+<h1>Historique de conge</h1>
+{% if conge.iduser == user.id %}
+<table width="50%" border="1" cellspacing="1" cellpadding="5">
+    <tr>
+        <th><center>Start date</center></th>
+        <th><center>Number days</center></th>
+        <th><center>status</center></th>
+       
+  
+        
+    </tr>
+    {% for key in conge %}
+    <tr>
+       <td><center>{{key.startdate|date("m/d/Y")}}</center></td>
+       <td><center>{{ key.numberdays|e }}</center></td>
+       <td><center>Encour</center></td>
+       
+
+       
+    
+       
+       
+   </tr>
+   {% endfor %}
+   {% endif %}
+   
+</table>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+  $(document).ready(function(){
+
+
+
+       $('#vka').hide();
+
+
+
+       $('#userId').hide();  
+
+
+  $('#submit_button ').click(function() {
+
+
+
+      alert("Votre demande a bien été enregistrée");
+
+
+
+  });
+
+
+
+});
+
+
+
+  </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
