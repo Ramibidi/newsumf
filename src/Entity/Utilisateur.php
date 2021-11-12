@@ -112,7 +112,8 @@ class Utilisateur implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER', 'ROLE_ADMIN');
+        // return array('ROLE_USER', 'ROLE_ADMIN');
+        return $this->roles;
     }
 
     public function setRoles($roles)

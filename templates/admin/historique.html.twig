@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<center>
+    <h1>Leave history </h1>
+    
+    <table width="50%" border="1" cellspacing="1" cellpadding="5">
+        <tr>
+            <th><center>Id user</center></th>
+            <th><center>Start date</center></th>
+            <th><center>Number days</center></th>
+            <th><center>status</center></th>
+            <th><center>Respond </center></th>
+            <th><center>Respond </center></th>
+           
+      
+            
+        </tr>
+        {% for key in conge %}
+        <tr>
+           <td><center>{{ key.iduser|e }}</center></td>
+           <td><center>{{key.startdate|date("m/d/Y")}}</center></td>
+           <td><center>{{ key.numberdays|e }}</center></td>
+           <td><center>Encour</center></td>
+           <td><center><a href="{{path('conge_valider' , {'id': key.id})}}"><button>Validate</button></center></td>
+           <td><center><a href="{{path('conge_refuser' , {'id': key.id})}}"><button>Refuse</button></a></center></td>    
+        </tr>
+       {% endfor %}
+    
+       
+    </table>
+    </center>
+    
+    {% endblock %}
+    
+    

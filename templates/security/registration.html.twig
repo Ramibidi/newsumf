@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <center>
       <h1>Registration on the site </h1>
+      <br>
+
+
+<br>
+
       {{ form_start(form)}}
       {{ form_row(form.username, {'label': 'First name ' ,'attr':{'placeholder':'Enter your first name'}}) }}
       <br>
@@ -31,9 +31,12 @@
 </center>
 {{ form_end(form)}}
 <br>
+
 <center>
-<a href="{{path('security_login')}}"><button>Log in </button></a>
+<a href="{{path('security_logout')}}"><button>Log out </button></a>
+<br>
 </center>
+
 </center>
 <center>
 <h1>list of users</h1>
@@ -43,7 +46,8 @@
         <th><center>Username</center></th>
         <th><center>Lastname</center></th>
         <th><center>Email</center></th>
-        <th><center>Ask for vacation</center></th>
+        
+        
         
     </tr>
     {% for key in users %}
@@ -51,12 +55,16 @@
        <td><center>{{ key.username|e }}</center></td>
        <td><center>{{ key.lastname|e }}</center></td>
        <td><center>{{ key.email|e }}</center></td>
-       <td><center><button class="button">Check </button></center></td>
+       
        
        
    </tr>
    {% endfor %}
 </table>
-</center>
+   
 
+</center>
+<br>
+<center><a href="{{path('conge_historique')}}"><button class="button">Leave request verification 
+</button></a></center>
 {% endblock %}

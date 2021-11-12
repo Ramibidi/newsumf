@@ -27,6 +27,11 @@ class News
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $date;
+
 
     public function getId(): ?int
     {
@@ -52,6 +57,17 @@ class News
     public function setText(string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

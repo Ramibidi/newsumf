@@ -1,18 +1,17 @@
 {% extends "base.html.twig" %}
 {% block title %}Conge{% endblock %}
 {% block body %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <center>
 <div class="container">
-<h1 class="create">Veuillez remplir le formulaire de congé </h1>
+<h1 class="create">Please complete the leave form</h1>
+<br>
+<br>
+
+
 {{ form_start(form2) }}
 <div id="userId">
-{{ form_row(form2.iduser,{value:users.id}) }}
+{{ form_row(form2.iduser,{value : app.user.id}) }}
 </div>
 <div class="content">
 {{ form_row(form2.startdate) }}
@@ -33,8 +32,8 @@
 
 
 <center>
-<h1>Historique de conge</h1>
-{% if conge.iduser == user.id %}
+<h1>Leave history </h1>
+
 <table width="50%" border="1" cellspacing="1" cellpadding="5">
     <tr>
         <th><center>Start date</center></th>
@@ -57,59 +56,11 @@
        
    </tr>
    {% endfor %}
-   {% endif %}
+
    
 </table>
 </center>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-
-
-  $(document).ready(function(){
-
-
-
-       $('#vka').hide();
-
-
-
-       $('#userId').hide();  
-
-
-  $('#submit_button ').click(function() {
-
-
-
-      alert("Votre demande a bien été enregistrée");
-
-
-
-  });
-
-
-
-});
-
-
-
-  </script>
 
 {% endblock %}
 

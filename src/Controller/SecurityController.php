@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Conges;
 use App\Entity\News;
+use App\Entity\Conges;
+use App\Entity\Upload;
 use App\Form\CongeType;
-use App\Entity\Utilisateur;
+use App\Form\UploadType;
 //use Doctrine\Persistence\ObjectManager;
+use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
-use Doctrine\Persistence\ObjectManager;
 //use Symfony\Component\BrowserKit\Request;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -95,13 +97,15 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/inscriptionConge/{id}", name="security_registrationConge")
+     * @Route("/createConge", name="security_registrationConge")
      */
-    public function registrationConge($id, Request $request)
+    public function registrationConge(Request $request)
     {
+        /*
         $user = $this->getDoctrine()
             ->getRepository(Utilisateur::class)
-            ->find($id);
+            ->findAll();
+            */
         $conge = new Conges();
         $form2 = $this->createForm(CongeType::class, $conge);
         $form2->handleRequest($request);
@@ -109,7 +113,7 @@ class SecurityController extends AbstractController
             // you can fetch the EntityManager via $this->getDoctrine()
             // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
             $entityManager = $this->getDoctrine()->getManager();
-            // tells Doctrine you want to save the User
+            // tells Doctrine you want to save the conge
             $entityManager->persist($conge);
             //executes the queries (i.e. the INSERT query) 
             $entityManager->flush();
@@ -136,7 +140,7 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/registrationConge.html.twig', [
-            'form2' => $form2->createView(), 'users' => $user, 'conge' => $conge
+            'form2' => $form2->createView(), /*'users' => $user,*/ 'conge' => $conge
         ]);
     }
 
@@ -155,5 +159,37 @@ class SecurityController extends AbstractController
         return $this->render('actulality/affiche.html.twig', array(
             'categ' => $categories
         ));
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @Route("/upload", name="security_upload")
+     */
+    public function profile_user(Request $request)
+    {
+        $upload = new Upload;
+        $user = $this->getDoctrine()
+            ->getRepository(Utilisateur::class)
+            ->findAll();
+        $form3 = $this->createForm(UploadType::class, $upload);
+        $form3->handleRequest($request);
+        if ($form3->isSubmitted() && $form3->isValid()) {
+            $file = $upload->getName();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory', $fileName));
+            $upload->setName($fileName);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+        return $this->render('user/upload.html.twig', ['user' => $user,  'form3' => $form3->createView()]);
     }
 }
