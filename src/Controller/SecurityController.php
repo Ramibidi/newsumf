@@ -23,11 +23,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
 
+
+
+
     /**
      * @Route("/inscription", name="security_registration")
      */
     public function registration(Request $request, UserPasswordEncoderInterface $encoder)
     {
+
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -41,30 +45,16 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             //return $this->redirectToRoute('security_login');
         }
-
+        /*
         $users = $this->getDoctrine()
             ->getRepository(Utilisateur::class)
             ->findAll();
-
-        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
-            $jsonData = array();
-            $idx = 0;
-            foreach ($users as $user) {
-                $temp = array(
-                    'username' => $user->getUsername(),
-                    'email' => $user->getEmail(),
-                    'roles' => $user->getRoles(),
-
-                );
-                $jsonData[$idx++] = $temp;
-            }
-            return new JsonResponse($jsonData);
-        }
-
+            */
         return $this->render('security/registration.html.twig', [
-            'form' => $form->createView(), 'users' => $users
+            'form' => $form->createView()
         ]);
     }
+
 
 
 
@@ -191,5 +181,21 @@ class SecurityController extends AbstractController
             $entityManager->flush();
         }
         return $this->render('user/upload.html.twig', ['user' => $user,  'form3' => $form3->createView()]);
+    }
+
+
+    /**
+     * @Route("/uplod", name="uplod")
+     */
+    public function nvroute()
+    {
+
+        $users = $this->getDoctrine()
+            ->getRepository(Utilisateur::class)
+            ->findAll();
+        return $this->render(
+            'security/registration2.html.twig',
+            ['users' => $users]
+        );
     }
 }

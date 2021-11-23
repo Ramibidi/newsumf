@@ -1,0 +1,32 @@
+{% block body %}
+<center>
+    <h1>list of users</h1>
+    <table width="50%" border="1" cellspacing="1" cellpadding="5" id="users">
+        <tr>
+            <th>
+                <center>Username</center>
+            </th>
+            <th>
+                <center>Lastname</center>
+            </th>
+            <th>
+                <center>Email</center>
+            </th>
+        </tr>
+        {% for key in users %}
+        <tr>
+            <td>
+                <center>{{ key.username|e }}</center>
+            </td>
+            <td>
+                <center>{{ key.lastname|e }}</center>
+            </td>
+            <td>
+                <center>{{ key.email|e }}</center>
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+        {% endblock %}

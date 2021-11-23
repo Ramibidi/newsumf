@@ -3,68 +3,98 @@
 {% block body %}
 
 <center>
-      <h1>Registration on the site </h1>
-      <br>
+    <h1>Registration on the site </h1>
+    <br>
 
 
-<br>
+    <br>
 
-      {{ form_start(form)}}
-      {{ form_row(form.username, {'label': 'First name ' ,'attr':{'placeholder':'Enter your first name'}}) }}
-      <br>
-      {{ form_row(form.lastname, {'label': 'Last name ' ,'attr':{'placeholder':'Enter your last name'}}) }}
-      <br>
-      {{ form_row(form.email, {'label': 'Address Email ' ,'attr':{'placeholder':'Enter your address Email'}}) }}
-      <br>
-      {{ form_row(form.password , {'label': 'Password ' ,'attr':{'placeholder':'Enter your password '}}) }}
-      <br>
-      {{ form_row(form.confirm_password , {'label': 'Password confirmation ' ,'attr':{'placeholder':'Confirm
-      '
-      }})}}
-      <br>
-      {{ form_row(form.roles ) }}
-      <br>
-      
+    {{ form_start(form, { 'attr': {'class': 'foo'} })}}
+    {{ form_row(form.username, {'label': 'First name ' ,'attr':{'placeholder':'Enter your first
+    name','id':'username'}})}}
+    <br>
+    {{ form_row(form.lastname, {'label': 'Last name ' ,'attr':{'placeholder':'Enter your last
+    name','id':'lastname'}})}}
+    <br>
+    {{ form_row(form.email, {'label': 'Address Email ' ,'attr':{'placeholder':'Enter your address
+    Email','id':'email'}}) }}
+    <br>
+    {{ form_row(form.password , {'label': 'Password ' ,'attr':{'placeholder':'Enter your password '}}) }}
+    <br>
+    {{ form_row(form.confirm_password , {'label': 'Password confirmation ' ,'attr':{'placeholder':'Confirm
+    '
+    }})}}
+    <br>
+    {{ form_row(form.roles ) }}
+    <br>
 
-      <button type="submit" class="btn btn-success">Registration</button>
-      
+
+    <button type="submit" id="success">Registration</button>
+    <button type="submit" id="success2">SHOW</button>
+
+
 </center>
 {{ form_end(form)}}
 <br>
-
 <center>
-<a href="{{path('security_logout')}}"><button>Log out </button></a>
-<br>
+    <table width="50%" border="1" cellspacing="1" cellpadding="5" id="users"></table>
 </center>
 
-</center>
-<center>
-<h1>list of users</h1>
-<center>
-<table width="50%" border="1" cellspacing="1" cellpadding="5">
-    <tr>
-        <th><center>Username</center></th>
-        <th><center>Lastname</center></th>
-        <th><center>Email</center></th>
-        
-        
-        
-    </tr>
-    {% for key in users %}
-    <tr>
-       <td><center>{{ key.username|e }}</center></td>
-       <td><center>{{ key.lastname|e }}</center></td>
-       <td><center>{{ key.email|e }}</center></td>
-       
-       
-       
-   </tr>
-   {% endfor %}
-</table>
-   
 
 </center>
 <br>
-<center><a href="{{path('conge_historique')}}"><button class="button">Leave request verification 
-</button></a></center>
+<center>
+    <a href="{{path('security_logout')}}"><button>Log out </button></a>
+    <br>
+</center>
+
+</center>
+<center>
+
+
+</center>
+<br>
+<center><a href="{{path('conge_historique')}}"><button class="button">Leave request verification
+        </button></a></center>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#success2").click(function () {
+
+            $("#users").load("http://127.0.0.1:8000/uplod");
+
+        });
+
+    });
+
+    $(document).ready(function () {
+        $("#success").click(function () {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action') || window.location.pathname,
+                type: "GET",
+                data: $(this).serialize(),
+                success: function (data) {
+                    $("#form_output").html(data);
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
 {% endblock %}

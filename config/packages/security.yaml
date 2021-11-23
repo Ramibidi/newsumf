@@ -41,3 +41,4 @@ security:
         - { path: ^/profile/, roles: ROLE_USER }
         - { path: ^/inscription, roles: ROLE_ADMIN }
         
+        
